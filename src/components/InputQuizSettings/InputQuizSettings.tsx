@@ -3,8 +3,8 @@ import { InputLabel } from '@material-ui/core'
 import { MenuItem } from '@material-ui/core'
 import { Select } from '@material-ui/core'
 import { FormControl } from '@material-ui/core'
-import { Button } from '@material-ui/core'
-import {TextField} from '@material-ui/core'
+import { TextField } from '@material-ui/core'
+
 //type of props passesd to inputQuizSettings
 type InputFormPropTypes = {
   totalQuestions: number,
@@ -15,7 +15,11 @@ type InputFormPropTypes = {
   setDifficulty: (e: string) => void,
   userName: string,
   setUserName: (name: string) => void
+  startQuiz: boolean,
+  setStartQuiz: (value: boolean) => void
 }
+
+
 //making component functional to pass props to it FC for Functional Component
 const InputQuizSettings: React.FC<InputFormPropTypes> = ({
   totalQuestions,
@@ -26,21 +30,29 @@ const InputQuizSettings: React.FC<InputFormPropTypes> = ({
   setDifficulty,
   userName,
   setUserName,
+  startQuiz,
+  setStartQuiz
 }) => {
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStartQuiz(true);
+    console.log(userName);
+  }
 
   return (
     <div>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         <div className="userNameField">
-        <TextField required
-          // style={{ width: "200px", margin: "5px" }}
-          type="text"
-          label="Your Name: "
-          variant="outlined"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value as string)}
-          fullWidth
-        />
+          <TextField required
+            // style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Your Name: "
+            variant="outlined"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value as string)}
+            fullWidth
+          />
         </div>
 
         <div className="totalQuestionField">
@@ -95,9 +107,8 @@ const InputQuizSettings: React.FC<InputFormPropTypes> = ({
           </FormControl>
         </div>
 
-        <Button variant="contained" color="primary" fullWidth>
-          Start Quiz
-        </Button>
+        <button type="submit" className='btn-startQuiz'>Start Quiz</button>
+        {/* <input type="submit" value='Start Quiz' className='btn-startQuiz' /> */}
       </form>
     </div>
   )

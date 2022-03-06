@@ -1,5 +1,3 @@
-import axios from "axios";
-import React from 'react'
 
 const Dummy = () => {
     //  axios.get(`https://opentdb.com/api.php?amount=5&category=22&difficulty=easy&type=multiple`)
